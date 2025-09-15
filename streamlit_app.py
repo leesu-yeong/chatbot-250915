@@ -23,7 +23,7 @@ else:
     # messages persist across reruns.
 
      # 대화 기록 저장
-  if "messages" not in st.session_state:
+    if "messages" not in st.session_state:
         st.session_state.messages = [
             {"role": "system", "content": (
                 "너는 재활 상담 전문 챗봇이야. "
@@ -38,8 +38,6 @@ else:
         with st.chat_message(message["role"]):
             st.markdown(message["content"])
 
-    # Create a chat input field to allow the user to enter a message. This will display
-    # automatically at the bottom of the page.
     # 사용자 입력 받기
     if user_input := st.chat_input("어디가 아프신가요? (예: 허리, 어깨, 무릎)"):
         # 대화 기록에 추가
