@@ -41,13 +41,19 @@ else:
 
         # Generate a response using the OpenAI API.
         stream = client.chat.completions.create(
-            model="gpt-3.5-turbo",
+            model="gpt-4o-mini",   # 더 적합한 최신 모델 사용
             messages=[
-                {"role": m["role"], "content": m["content"]}
-                for m in st.session_state.messages
+                {"role": "system", "content": (
+                    "너는 재활 상담 전문 챗봇이야. "
+                    "사용자가 아픈 부위를 말하면, 왜 아플 수 있는지 가능한 원인을 설명해주고 "
+                    "집에서 할 수 있는 간단한 재활 운동, 스트레칭 방법을 알려줘. "
+                    "추가로 도움이 될 만한 유튜브 영상 링크를 추천해."
+                 )},
+                {"role": "user", "content": "허리가 아파요"}
             ],
             stream=True,
         )
+
 
         # Stream the response to the chat using `st.write_stream`, then store it in 
         # session state.
